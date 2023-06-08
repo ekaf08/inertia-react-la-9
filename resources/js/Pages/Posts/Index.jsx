@@ -39,7 +39,14 @@ export default function PostIndex({ posts, session }) {
                                     <tr key={index}>
                                         <td>{post.title}</td>
                                         <td>{post.content}</td>
-                                        <td className="text-center"></td>
+                                        <td className="text-center">
+                                            <Link
+                                                href={`/posts/${post.id}/edit`}
+                                                className="btn btn-sm btn-primary me-2"
+                                            >
+                                                Edit
+                                            </Link>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

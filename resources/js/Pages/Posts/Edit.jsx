@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 
-// import layout
 import Layout from "../../Layouts/Default";
 
-// import inertia adapter
 import { Inertia } from "@inertiajs/inertia";
 
-export default function createPost({ errors }) {
-    // define state
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+export default function EditPost({ errors, post }) {
+    const [title, setTitle] = useState(post.title);
+    const [content, setContent] = useState(post.content);
 
-    // function "storePost"
-    const storePost = async (e) => {
+    // function "updatePost"
+    const updatePost = async (e) => {
         e.preventDefault();
 
-        Inertia.post("/posts", {
+        Inertia.put(`/posts/${post.id}`, {
             title: title,
             content: content,
         });
@@ -27,12 +24,10 @@ export default function createPost({ errors }) {
                 <div className="col-12">
                     <div className="card border-0 rounded shadow-sm border-top-success">
                         <div className="card-header">
-                            <span className="font-weight-bold">
-                                Tambah Post
-                            </span>
+                            <span className="font-weight-bold">Edit Post</span>
                         </div>
                         <div className="card-body">
-                            <form action="" onSubmit={storePost}>
+                            <form action="" onSubmit={updatePost}>
                                 <div className="mb-3">
                                     <label
                                         htmlFor=""
@@ -73,7 +68,7 @@ export default function createPost({ errors }) {
                                         placeholder="Masukan isi konten"
                                     ></textarea>
                                 </div>
-                                {errors.content && (
+                                {errors.title && (
                                     <div className="alert alert-danger">
                                         {errors.content}
                                     </div>
