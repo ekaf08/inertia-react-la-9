@@ -46,6 +46,12 @@ export default function PostIndex({ posts, session }) {
                                             >
                                                 Edit
                                             </Link>
+                                            <Link
+                                                href={`/posts/${post.id}/destroy`}
+                                                className="btn btn-sm btn-danger me-2"
+                                            >
+                                                Hapus
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}
