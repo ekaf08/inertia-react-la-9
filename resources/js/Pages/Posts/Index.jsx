@@ -7,7 +7,14 @@ import Layout from "../../Layouts/Default";
 //import Link
 import { Link } from "@inertiajs/inertia-react";
 
+// import inertia adapter
+import { Inertia } from "@inertiajs/inertia";
+
 export default function PostIndex({ posts, session }) {
+    // method deletePost
+    const deletePost = async (id) => {
+        Inertia.delete(`/posts/${id}`);
+    };
     return (
         <Layout>
             <div style={{ marginTop: "100px" }}>
@@ -27,11 +34,11 @@ export default function PostIndex({ posts, session }) {
                 <div className="card border-0 rounded shadow-sm">
                     <div className="card-body">
                         <table className="table table-bordered table-striped">
-                            <thead>
+                            <thead className="text-center">
                                 <tr>
-                                    <th scope="col">TITLE</th>
-                                    <th scope="col">CONTENT</th>
-                                    <th scope="col">ACTIONS</th>
+                                    <th scope="col">Judul</th>
+                                    <th scope="col">Konten</th>
+                                    <th scope="col">#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,12 +53,14 @@ export default function PostIndex({ posts, session }) {
                                             >
                                                 Edit
                                             </Link>
-                                            <Link
-                                                href={`/posts/${post.id}/destroy`}
-                                                className="btn btn-sm btn-danger me-2"
+                                            <button
+                                                onClick={() =>
+                                                    deletePost(post.id)
+                                                }
+                                                className="btn btn-sm btn-danger"
                                             >
                                                 Hapus
-                                            </Link>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
